@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Márgenes generales -->
+    <dimen name="margen_pantalla">16dp</dimen>
+    <dimen name="margen_chico">8dp</dimen>
+
+    <!-- Lista de mascotas -->
+    <dimen name="foto_lista">56dp</dimen>
+    <dimen name="relleno_icono_lista">12dp</dimen>
+    <dimen name="espacio_inferior_lista">88dp</dimen>
+</resources>

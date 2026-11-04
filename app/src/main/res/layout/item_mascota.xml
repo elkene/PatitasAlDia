@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fila de la lista de mascotas: foto circular, nombre y especie -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:paddingHorizontal="@dimen/margen_pantalla"
+    android:paddingVertical="@dimen/margen_chico">
+
+    <!-- Mientras no haya foto (fase 7) se muestra la huella sobre un círculo de color -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_foto"
+        android:layout_width="@dimen/foto_lista"
+        android:layout_height="@dimen/foto_lista"
+        android:background="?attr/colorPrimaryContainer"
+        android:padding="@dimen/relleno_icono_lista"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.PatitasAlDia.Circulo"
+        app:srcCompat="@drawable/ic_huella"
+        app:tint="?attr/colorOnPrimaryContainer" />
+
+    <TextView
+        android:id="@+id/txt_nombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margen_pantalla"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        app:layout_constraintBottom_toTopOf="@id/txt_especie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img_foto"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Firulais" />
+
+    <TextView
+        android:id="@+id/txt_especie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/txt_nombre"
+        app:layout_constraintStart_toStartOf="@id/txt_nombre"
+        app:layout_constraintTop_toBottomOf="@id/txt_nombre"
+        tools:text="Perro" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
