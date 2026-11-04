@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PatitasAlDia">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -21,6 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Formulario de mascota. Al regresar se vuelve a la lista (MainActivity) -->
+        <activity
+            android:name=".ui.form.FormMascotaActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>

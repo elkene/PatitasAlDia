@@ -30,13 +30,22 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildFeatures {
+        // Genera clases de enlace para los layouts y evita usar findViewById
+        viewBinding = true
+    }
 }
 
 dependencies {
     implementation(libs.activity.ktx)
+    implementation(libs.fragment.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)
+    implementation(libs.recyclerview)
     implementation(libs.material)
+    implementation(libs.coil)
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
