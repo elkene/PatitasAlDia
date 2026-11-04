@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Contexto del proyecto para Claude Code (no se sube)
+CLAUDE.md

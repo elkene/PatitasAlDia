@@ -1,7 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Tema base de la aplicación (modo oscuro) -->
     <style name="Base.Theme.PatitasAlDia" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/naranja_principal_oscuro</item>
+        <item name="colorOnPrimary">@color/naranja_sobre_principal_oscuro</item>
+        <item name="colorPrimaryContainer">@color/naranja_contenedor_oscuro</item>
+        <item name="colorOnPrimaryContainer">@color/naranja_contenedor</item>
+        <item name="colorSecondary">@color/verde_secundario_oscuro</item>
+        <item name="colorOnSecondary">@color/verde_sobre_secundario_oscuro</item>
+        <item name="colorSecondaryContainer">@color/verde_contenedor_oscuro</item>
+        <item name="colorOnSecondaryContainer">@color/verde_contenedor</item>
+        <item name="android:colorBackground">@color/fondo_oscuro</item>
+        <item name="colorOnBackground">@color/texto_sobre_fondo_oscuro</item>
+        <item name="colorSurface">@color/fondo_oscuro</item>
+        <item name="colorOnSurface">@color/texto_sobre_fondo_oscuro</item>
     </style>
 </resources>

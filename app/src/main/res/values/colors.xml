@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Colores básicos -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Paleta del tema claro -->
+    <color name="naranja_principal">#FFB85C1A</color>
+    <color name="naranja_contenedor">#FFFFDBC8</color>
+    <color name="naranja_sobre_contenedor">#FF3A1700</color>
+    <color name="verde_secundario">#FF2E6B5E</color>
+    <color name="verde_contenedor">#FFB4F0DF</color>
+    <color name="verde_sobre_contenedor">#FF00201A</color>
+    <color name="fondo_claro">#FFFFF8F5</color>
+    <color name="texto_sobre_fondo_claro">#FF221A15</color>
+
+    <!-- Paleta del tema oscuro -->
+    <color name="naranja_principal_oscuro">#FFFFB68B</color>
+    <color name="naranja_sobre_principal_oscuro">#FF5C2700</color>
+    <color name="naranja_contenedor_oscuro">#FF833C00</color>
+    <color name="verde_secundario_oscuro">#FF98D4C3</color>
+    <color name="verde_sobre_secundario_oscuro">#FF003730</color>
+    <color name="verde_contenedor_oscuro">#FF0F5046</color>
+    <color name="fondo_oscuro">#FF1A120D</color>
+    <color name="texto_sobre_fondo_oscuro">#FFF0DFD7</color>
+
+    <!-- Avisos de vacunas (próximas o vencidas) -->
+    <color name="aviso_vencida">#FFBA1A1A</color>
+    <color name="aviso_proxima">#FFB26A00</color>
 </resources>
