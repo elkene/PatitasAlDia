@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">PatitasAlDia</string>
+    <!-- Nombre de la aplicación -->
+    <string name="app_name">Patitas al Día</string>
+
+    <!-- Acciones generales -->
+    <string name="accion_guardar">Guardar</string>
+    <string name="accion_cancelar">Cancelar</string>
+    <string name="accion_editar">Editar</string>
+    <string name="accion_eliminar">Eliminar</string>
+    <string name="accion_aceptar">Aceptar</string>
+    <string name="accion_regresar">Regresar</string>
+
+    <!-- Pantalla principal -->
+    <string name="sin_mascotas">Aún no tienes mascotas registradas.\nToca el botón + para agregar una.</string>
+    <string name="agregar_mascota">Agregar mascota</string>
+    <string name="foto_de_mascota">Foto de %1$s</string>
+
+    <!-- Formulario de mascota -->
+    <string name="titulo_nueva_mascota">Nueva mascota</string>
+    <string name="titulo_editar_mascota">Editar mascota</string>
 </resources>

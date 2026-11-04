@@ -1,9 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Tema base de la aplicación (modo claro) -->
     <style name="Base.Theme.PatitasAlDia" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/naranja_principal</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/naranja_contenedor</item>
+        <item name="colorOnPrimaryContainer">@color/naranja_sobre_contenedor</item>
+        <item name="colorSecondary">@color/verde_secundario</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/verde_contenedor</item>
+        <item name="colorOnSecondaryContainer">@color/verde_sobre_contenedor</item>
+        <item name="android:colorBackground">@color/fondo_claro</item>
+        <item name="colorOnBackground">@color/texto_sobre_fondo_claro</item>
+        <item name="colorSurface">@color/fondo_claro</item>
+        <item name="colorOnSurface">@color/texto_sobre_fondo_claro</item>
     </style>
 
     <style name="Theme.PatitasAlDia" parent="Base.Theme.PatitasAlDia" />
+
+    <!-- Forma circular para las fotos de las mascotas -->
+    <style name="ShapeAppearance.PatitasAlDia.Circulo" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>
