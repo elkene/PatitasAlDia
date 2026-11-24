@@ -2,10 +2,24 @@
 <resources>
     <!-- Márgenes generales -->
     <dimen name="margen_pantalla">16dp</dimen>
+    <dimen name="margen_medio">12dp</dimen>
     <dimen name="margen_chico">8dp</dimen>
+    <dimen name="margen_minimo">4dp</dimen>
+    <dimen name="margen_dialogo">24dp</dimen>
 
     <!-- Lista de mascotas -->
     <dimen name="foto_lista">56dp</dimen>
     <dimen name="relleno_icono_lista">12dp</dimen>
     <dimen name="espacio_inferior_lista">88dp</dimen>
+
+    <!-- Detalle de la mascota -->
+    <dimen name="foto_detalle">140dp</dimen>
+    <dimen name="relleno_icono_detalle">32dp</dimen>
+    <dimen name="borde_aviso">2dp</dimen>
+    <dimen name="separador">1dp</dimen>
+
+    <!-- Formulario -->
+    <dimen name="foto_formulario">120dp</dimen>
+    <dimen name="relleno_icono_formulario">28dp</dimen>
+    <dimen name="columna_foto_formulario">260dp</dimen>
 </resources>

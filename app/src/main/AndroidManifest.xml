@@ -2,6 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--
+        La cámara es opcional: así la app también se puede instalar en
+        dispositivos sin cámara (por ejemplo, algunas tabletas).
+        No se declara el permiso CAMERA porque la foto la toma la app de
+        cámara del sistema (ActivityResultContracts.TakePicture).
+    -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -22,12 +32,31 @@
             </intent-filter>
         </activity>
 
-        <!-- Formulario de mascota. Al regresar se vuelve a la lista (MainActivity) -->
+        <!-- Detalle de una mascota (solo en teléfono; en tableta se ve dentro de MainActivity) -->
+        <activity
+            android:name=".ui.detalle.DetalleMascotaActivity"
+            android:exported="false" />
+
+        <!-- Formulario para agregar o editar una mascota -->
         <activity
             android:name=".ui.form.FormMascotaActivity"
             android:exported="false"
-            android:parentActivityName=".ui.main.MainActivity"
             android:windowSoftInputMode="adjustResize" />
+
+        <!--
+            Permite pasarle a la app de cámara un Uri content:// del archivo
+            donde debe guardar la foto. Las carpetas permitidas están en
+            res/xml/file_paths.xml.
+        -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
     </application>
 

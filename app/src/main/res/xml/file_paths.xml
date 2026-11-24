@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Carpetas que el FileProvider puede compartir con otras apps.
+    Solo filesDir/fotos: ahí la cámara guarda la foto de la mascota.
+-->
+<paths>
+    <files-path
+        name="fotos"
+        path="fotos/" />
+</paths>

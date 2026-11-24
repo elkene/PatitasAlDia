@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
+    android:background="@drawable/fondo_item_lista"
     android:paddingHorizontal="@dimen/margen_pantalla"
     android:paddingVertical="@dimen/margen_chico">
 
-    <!-- Mientras no haya foto (fase 7) se muestra la huella sobre un círculo de color -->
+    <!-- Foto de la mascota; si no tiene, MascotaAdapter muestra el ícono de su especie -->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_foto"
         android:layout_width="@dimen/foto_lista"

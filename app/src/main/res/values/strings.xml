@@ -7,15 +7,138 @@
     <string name="accion_cancelar">Cancelar</string>
     <string name="accion_editar">Editar</string>
     <string name="accion_eliminar">Eliminar</string>
-    <string name="accion_aceptar">Aceptar</string>
     <string name="accion_regresar">Regresar</string>
+    <string name="accion_agregar">Agregar</string>
+
+    <!-- Especies y sexo (lo que ve el usuario; en la base se guardan valores fijos) -->
+    <string name="especie_perro">Perro</string>
+    <string name="especie_gato">Gato</string>
+    <string name="especie_ave">Ave</string>
+    <string name="especie_otro">Otro</string>
+    <string name="sexo_macho">Macho</string>
+    <string name="sexo_hembra">Hembra</string>
 
     <!-- Pantalla principal -->
     <string name="sin_mascotas">Aún no tienes mascotas registradas.\nToca el botón + para agregar una.</string>
     <string name="agregar_mascota">Agregar mascota</string>
     <string name="foto_de_mascota">Foto de %1$s</string>
+    <string name="selecciona_mascota">Selecciona una mascota para ver su información</string>
 
     <!-- Formulario de mascota -->
     <string name="titulo_nueva_mascota">Nueva mascota</string>
     <string name="titulo_editar_mascota">Editar mascota</string>
+    <string name="foto_mascota">Foto de la mascota</string>
+    <string name="foto_camara">Cámara</string>
+    <string name="foto_galeria">Galería</string>
+    <string name="foto_quitar">Quitar foto</string>
+    <string name="campo_nombre">Nombre *</string>
+    <string name="campo_especie">Especie *</string>
+    <string name="campo_raza">Raza</string>
+    <string name="campo_sexo">Sexo</string>
+    <string name="campo_fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="campo_peso">Peso</string>
+    <string name="unidad_kg">kg</string>
+    <string name="seccion_veterinario">Veterinario</string>
+    <string name="campo_vet_nombre">Nombre del veterinario</string>
+    <string name="campo_vet_telefono">Teléfono del veterinario</string>
+    <string name="campo_vet_correo">Correo del veterinario</string>
+    <string name="campos_obligatorios">* Campos obligatorios</string>
+    <string name="borrar_fecha">Borrar fecha</string>
+    <string name="elegir_fecha">Elegir fecha</string>
+    <string name="error_nombre_obligatorio">Escribe el nombre de la mascota</string>
+    <string name="error_especie_obligatoria">Elige la especie</string>
+    <string name="error_peso">Escribe un peso válido en kg</string>
+    <string name="error_telefono">Escribe un teléfono válido (de 7 a 15 dígitos)</string>
+    <string name="error_correo">Escribe un correo válido</string>
+    <string name="mascota_guardada">Mascota guardada</string>
+    <string name="error_foto">No se pudo cargar la imagen</string>
+    <string name="error_sin_camara">No hay una app de cámara disponible</string>
+
+    <!-- Detalle de la mascota -->
+    <string name="detalle_especie_raza">%1$s · %2$s</string>
+    <string name="detalle_sexo">Sexo: %1$s</string>
+    <string name="detalle_nacimiento">Nacimiento: %1$s (%2$s)</string>
+    <string name="detalle_nacimiento_sin_edad">Nacimiento: %1$s</string>
+    <string name="detalle_peso">Peso: %1$s kg</string>
+    <string name="detalle_vet_telefono">Teléfono: %1$s</string>
+    <string name="detalle_vet_correo">Correo: %1$s</string>
+    <string name="detalle_sin_vet">Sin datos del veterinario. Agrégalos con el botón Editar.</string>
+    <string name="edad_menos_de_un_mes">menos de un mes</string>
+    <plurals name="edad_anios">
+        <item quantity="one">%d año</item>
+        <item quantity="other">%d años</item>
+    </plurals>
+    <plurals name="edad_meses">
+        <item quantity="one">%d mes</item>
+        <item quantity="other">%d meses</item>
+    </plurals>
+    <string name="accion_llamar">Llamar</string>
+    <string name="accion_sms">SMS</string>
+    <string name="accion_correo">Correo</string>
+    <string name="confirmar_eliminar_mascota">¿Eliminar a %1$s? También se borrarán sus vacunas y citas.</string>
+    <string name="titulo_confirmar_eliminar">Confirmar</string>
+
+    <!-- Vacunas -->
+    <string name="seccion_vacunas">Vacunas</string>
+    <string name="agregar_vacuna">Agregar vacuna</string>
+    <string name="sin_vacunas">Sin vacunas registradas</string>
+    <string name="vacuna_aplicada">Aplicada: %1$s</string>
+    <string name="vacuna_proxima">Próxima dosis: %1$s</string>
+    <string name="estado_vence_hoy">Vence hoy</string>
+    <plurals name="estado_vence_en">
+        <item quantity="one">Vence en %d día</item>
+        <item quantity="other">Vence en %d días</item>
+    </plurals>
+    <plurals name="estado_vencida">
+        <item quantity="one">Venció hace %d día</item>
+        <item quantity="other">Venció hace %d días</item>
+    </plurals>
+    <string name="estado_al_dia">Al día</string>
+    <string name="titulo_nueva_vacuna">Nueva vacuna</string>
+    <string name="titulo_editar_vacuna">Editar vacuna</string>
+    <string name="campo_vacuna_nombre">Nombre de la vacuna *</string>
+    <string name="campo_fecha_aplicacion">Fecha de aplicación *</string>
+    <string name="campo_proxima_dosis">Próxima dosis</string>
+    <string name="campo_notas">Notas</string>
+    <string name="error_vacuna_nombre">Escribe el nombre de la vacuna</string>
+    <string name="error_fecha_obligatoria">Elige una fecha</string>
+    <string name="error_proxima_dosis">Debe ser posterior a la fecha de aplicación</string>
+    <string name="eliminar_vacuna">Eliminar vacuna</string>
+    <string name="confirmar_eliminar_vacuna">¿Eliminar la vacuna %1$s?</string>
+
+    <!-- Citas -->
+    <string name="seccion_citas">Citas</string>
+    <string name="agregar_cita">Agregar cita</string>
+    <string name="sin_citas">Sin citas registradas</string>
+    <string name="citas_proximas">Próximas</string>
+    <string name="citas_pasadas">Pasadas</string>
+    <string name="cita_fecha_hora">%1$s · %2$s</string>
+    <string name="titulo_nueva_cita">Nueva cita</string>
+    <string name="titulo_editar_cita">Editar cita</string>
+    <string name="campo_fecha">Fecha *</string>
+    <string name="campo_hora">Hora</string>
+    <string name="campo_motivo">Motivo *</string>
+    <string name="borrar_hora">Borrar hora</string>
+    <string name="elegir_hora">Elegir hora</string>
+    <string name="error_motivo">Escribe el motivo de la cita</string>
+    <string name="eliminar_cita">Eliminar cita</string>
+    <string name="confirmar_eliminar_cita">¿Eliminar la cita del %1$s?</string>
+
+    <!-- Comunicación con el veterinario -->
+    <string name="sms_texto">Hola, quisiera agendar una cita para mi mascota %1$s.</string>
+    <string name="correo_asunto">Historial de vacunas de %1$s</string>
+    <string name="correo_saludo">Hola, le comparto el historial de vacunas de mi mascota.</string>
+    <string name="correo_nombre">Nombre: %1$s</string>
+    <string name="correo_especie">Especie: %1$s</string>
+    <string name="correo_raza">Raza: %1$s</string>
+    <string name="correo_sexo">Sexo: %1$s</string>
+    <string name="correo_nacimiento">Fecha de nacimiento: %1$s</string>
+    <string name="correo_peso">Peso: %1$s kg</string>
+    <string name="correo_titulo_vacunas">Vacunas:</string>
+    <string name="correo_sin_vacunas">Sin vacunas registradas.</string>
+    <string name="correo_vacuna">- %1$s: aplicada el %2$s</string>
+    <string name="correo_vacuna_proxima">, próxima dosis el %1$s</string>
+    <string name="correo_vacuna_notas">. Notas: %1$s</string>
+    <string name="correo_firma">Enviado desde Patitas al Día.</string>
+    <string name="error_sin_app">No hay ninguna app instalada para realizar esta acción</string>
 </resources>
