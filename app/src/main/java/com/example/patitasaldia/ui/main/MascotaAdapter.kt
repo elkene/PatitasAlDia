@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.patitasaldia.R
 import com.example.patitasaldia.databinding.ItemMascotaBinding
 import com.example.patitasaldia.model.Mascota
+import com.example.patitasaldia.util.mostrarFotoMascota
+import com.example.patitasaldia.util.textoEspecie
 
 /**
  * Adaptador de la lista de mascotas.
@@ -20,6 +22,9 @@ import com.example.patitasaldia.model.Mascota
 class MascotaAdapter(
     private val alTocar: (Mascota) -> Unit
 ) : ListAdapter<Mascota, MascotaAdapter.MascotaViewHolder>(ComparadorMascotas) {
+
+    /** Mascota resaltada en la tableta (la que se ve en el panel derecho). */
+    private var idSeleccionado: Long? = null
 
     /** Guarda las vistas de una fila para no buscarlas cada vez que se reutiliza. */
     class MascotaViewHolder(val binding: ItemMascotaBinding) :
@@ -34,12 +39,28 @@ class MascotaAdapter(
         val mascota = getItem(position)
         with(holder.binding) {
             txtNombre.text = mascota.nombre
-            txtEspecie.text = mascota.especie
+            txtEspecie.text = root.context.textoEspecie(mascota.especie)
+            imgFoto.mostrarFotoMascota(mascota.fotoRuta, mascota.especie, R.dimen.relleno_icono_lista)
             imgFoto.contentDescription =
                 root.context.getString(R.string.foto_de_mascota, mascota.nombre)
-            // En la fase 7 aquí se cargará la foto con Coil o el ícono según la especie
+            // "activated" activa el color de fondo definido en fondo_item_lista.xml
+            root.isActivated = mascota.id == idSeleccionado
             root.setOnClickListener { alTocar(mascota) }
         }
+    }
+
+    /** Cambia la mascota resaltada y redibuja solo las dos filas afectadas. */
+    fun seleccionar(id: Long?) {
+        if (id == idSeleccionado) return
+        val anterior = idSeleccionado
+        idSeleccionado = id
+        redibujar(anterior)
+        redibujar(id)
+    }
+
+    private fun redibujar(id: Long?) {
+        val posicion = currentList.indexOfFirst { it.id == id }
+        if (posicion >= 0) notifyItemChanged(posicion)
     }
 
     /** Le indica a DiffUtil cómo comparar dos mascotas. */

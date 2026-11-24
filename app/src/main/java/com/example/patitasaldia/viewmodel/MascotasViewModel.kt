@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.example.patitasaldia.data.DbHelper
 import com.example.patitasaldia.data.MascotaDao
@@ -12,19 +13,26 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
- * ViewModel de la pantalla principal. Conserva la lista de mascotas mientras
- * la actividad se destruye y se vuelve a crear (por ejemplo, al rotar).
+ * ViewModel de la pantalla principal. Lo comparten MainActivity y
+ * ListaMascotasFragment.
  *
- * Hereda de AndroidViewModel para tener acceso al contexto de la aplicación,
- * que se necesita para abrir la base de datos.
+ * - La lista de mascotas se conserva al rotar porque el ViewModel sobrevive.
+ * - El id de la mascota seleccionada (tableta) se guarda en SavedStateHandle,
+ *   que además sobrevive si Android cierra la app en segundo plano.
  */
-class MascotasViewModel(application: Application) : AndroidViewModel(application) {
+class MascotasViewModel(
+    application: Application,
+    private val estado: SavedStateHandle
+) : AndroidViewModel(application) {
 
     private val mascotaDao = MascotaDao(DbHelper.obtenerInstancia(application))
 
     // Solo el ViewModel puede modificar la lista; la interfaz solo la observa
     private val _mascotas = MutableLiveData<List<Mascota>>()
     val mascotas: LiveData<List<Mascota>> = _mascotas
+
+    /** Id de la mascota que se muestra en el panel derecho de la tableta, o null. */
+    val seleccionadaId: LiveData<Long?> = estado.getLiveData(CLAVE_SELECCIONADA, null)
 
     /**
      * Lee las mascotas de la base en un hilo de fondo y publica el resultado.
@@ -34,5 +42,14 @@ class MascotasViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch(Dispatchers.IO) {
             _mascotas.postValue(mascotaDao.obtenerTodas())
         }
+    }
+
+    /** Marca la mascota seleccionada en la tableta (null para quitar la selección). */
+    fun seleccionar(id: Long?) {
+        estado[CLAVE_SELECCIONADA] = id
+    }
+
+    private companion object {
+        const val CLAVE_SELECCIONADA = "mascota_seleccionada"
     }
 }

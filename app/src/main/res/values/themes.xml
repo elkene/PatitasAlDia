@@ -15,7 +15,20 @@
         <item name="colorOnSurface">@color/texto_sobre_fondo_claro</item>
     </style>
 
-    <style name="Theme.PatitasAlDia" parent="Base.Theme.PatitasAlDia" />
+    <!--
+        Tema final. Lo que se define aquí aplica a modo claro y oscuro, porque
+        values-night solo redefine Base.Theme.PatitasAlDia.
+    -->
+    <style name="Theme.PatitasAlDia" parent="Base.Theme.PatitasAlDia">
+        <!-- Todos los campos de texto con borde (estilo Outlined de Material 3) -->
+        <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
+    </style>
+
+    <!-- Título de sección (Vacunas, Citas, Veterinario) -->
+    <style name="TextoSeccion" parent="">
+        <item name="android:textAppearance">?attr/textAppearanceTitleMedium</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
 
     <!-- Forma circular para las fotos de las mascotas -->
     <style name="ShapeAppearance.PatitasAlDia.Circulo" parent="">

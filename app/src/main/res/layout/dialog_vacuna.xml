@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Campos del diálogo para agregar o editar una vacuna -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/margen_dialogo"
+        android:paddingTop="@dimen/margen_chico">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/campo_vacuna_nombre">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_fecha_aplicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margen_chico"
+            android:hint="@string/campo_fecha_aplicacion"
+            app:startIconContentDescription="@string/elegir_fecha"
+            app:startIconDrawable="@drawable/ic_calendario">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_fecha_aplicacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_proxima_dosis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margen_chico"
+            android:hint="@string/campo_proxima_dosis"
+            app:endIconContentDescription="@string/borrar_fecha"
+            app:endIconDrawable="@drawable/ic_cerrar"
+            app:endIconMode="custom"
+            app:startIconContentDescription="@string/elegir_fecha"
+            app:startIconDrawable="@drawable/ic_calendario">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_proxima_dosis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_notas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margen_chico"
+            android:hint="@string/campo_notas">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_notas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLines="4" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Botones para comunicarse con el veterinario (fase 8) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_llamar"
+        style="@style/Widget.Material3.Button.TonalButton.Icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margen_minimo"
+        android:layout_weight="1"
+        android:text="@string/accion_llamar"
+        app:icon="@drawable/ic_telefono" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_sms"
+        style="@style/Widget.Material3.Button.TonalButton.Icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margen_minimo"
+        android:layout_weight="1"
+        android:text="@string/accion_sms"
+        app:icon="@drawable/ic_sms" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_correo"
+        style="@style/Widget.Material3.Button.TonalButton.Icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margen_minimo"
+        android:layout_weight="1"
+        android:text="@string/accion_correo"
+        app:icon="@drawable/ic_correo" />
+
+</LinearLayout>

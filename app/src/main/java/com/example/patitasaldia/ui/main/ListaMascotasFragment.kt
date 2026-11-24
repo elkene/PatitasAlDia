@@ -51,6 +51,11 @@ class ListaMascotasFragment : Fragment() {
             adaptador.submitList(mascotas)
             binding.txtSinMascotas.isVisible = mascotas.isEmpty()
         }
+
+        // En la tableta, resalta la mascota que se ve en el panel derecho
+        viewModel.seleccionadaId.observe(viewLifecycleOwner) { id ->
+            adaptador.seleccionar(id)
+        }
     }
 
     /**

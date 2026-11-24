@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Datos de la mascota y de su veterinario. Las filas sin dato se ocultan desde el código. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_sexo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        tools:text="Sexo: Macho" />
+
+    <TextView
+        android:id="@+id/txt_nacimiento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        tools:text="Nacimiento: 15/03/2021 (5 años)" />
+
+    <TextView
+        android:id="@+id/txt_peso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        tools:text="Peso: 28.5 kg" />
+
+    <TextView
+        style="@style/TextoSeccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margen_medio"
+        android:text="@string/seccion_veterinario" />
+
+    <TextView
+        android:id="@+id/txt_vet_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        tools:text="Dra. Laura Méndez" />
+
+    <TextView
+        android:id="@+id/txt_vet_telefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        tools:text="Teléfono: 6641234567" />
+
+    <TextView
+        android:id="@+id/txt_vet_correo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        tools:text="Correo: laura@veterinaria.com" />
+
+    <TextView
+        android:id="@+id/txt_sin_vet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detalle_sin_vet"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:visibility="gone" />
+
+</LinearLayout>

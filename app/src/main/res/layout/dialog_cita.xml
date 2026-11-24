@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Campos del diálogo para agregar o editar una cita -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/margen_dialogo"
+        android:paddingTop="@dimen/margen_chico">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/campo_fecha"
+            app:startIconContentDescription="@string/elegir_fecha"
+            app:startIconDrawable="@drawable/ic_calendario">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_fecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_hora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margen_chico"
+            android:hint="@string/campo_hora"
+            app:endIconContentDescription="@string/borrar_hora"
+            app:endIconDrawable="@drawable/ic_cerrar"
+            app:endIconMode="custom"
+            app:startIconContentDescription="@string/elegir_hora"
+            app:startIconDrawable="@drawable/ic_reloj">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_hora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_motivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margen_chico"
+            android:hint="@string/campo_motivo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_motivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_notas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margen_chico"
+            android:hint="@string/campo_notas">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_notas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLines="4" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</ScrollView>
