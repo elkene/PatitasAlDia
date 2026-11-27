@@ -20,7 +20,7 @@ Este documento explica qué hace cada fase, qué archivos involucra, cómo se pr
 | 7 | Foto de la mascota | Terminada |
 | 8 | Comunicación con el veterinario | Terminada |
 | 9 | Pulido | Terminada |
-| 10 | Entregables | **En progreso**: APK listo en `entregables/` y borrador del manual hecho (fuera del repositorio); faltan los datos de la portada, el video y el archivo comprimido |
+| 10 | Entregables | **En progreso**: borrador del manual hecho (fuera del repositorio); faltan los datos de la portada, el video y el archivo comprimido |
 
 Las fases 0 a 9 compilan, pasan sus pruebas automáticas y se probaron en un teléfono físico (Android 17) y en el emulador Pixel Tablet (Android 15). Lo único que falta es la fase 10.
 
@@ -403,7 +403,6 @@ CREATE TABLE citas (
 - [x] Sin textos fijos fuera de `strings.xml` (lint sin avisos)
 - [x] La app no se cierra con campos vacíos, sin foto o sin datos del veterinario
 - [x] Datos de prueba detrás de una bandera: solo se insertan si la app es de depuración (`FLAG_DEBUGGABLE`)
-- [x] APK de depuración probado en un teléfono físico
 
 **Nota:** lint solo avisa que existen versiones más nuevas de algunas librerías. No se actualizaron para no arriesgar cambios a esta altura del proyecto.
 
@@ -411,12 +410,11 @@ CREATE TABLE citas (
 
 ## Fase 10. Entregables
 
-**Estado: En progreso.** El APK ya está en la carpeta `entregables/` y el borrador del manual de usuario está hecho, pero no se sube al repositorio. Falta llenar la portada del manual, grabar el video y generar el archivo comprimido.
+**Estado: En progreso.** El borrador del manual de usuario está hecho, pero se comparte por fuera del repositorio. Falta llenar la portada del manual, grabar el video y generar el archivo comprimido.
 
 - [x] Manual de usuario (borrador en Word, se comparte por fuera del repositorio). Falta llenar en la portada: facultad, nombres, matrículas, grupo y docente. Opcional: agregar una captura del correo y del teléfono en horizontal.
 - [ ] Video de demostración
 - [ ] Comprimir el proyecto sin las carpetas `build/` ni `.gradle/`
-- [x] APK de depuración para instalar en cualquier teléfono (`entregables/PatitasAlDia.apk`). Al ser de depuración, la primera vez muestra mascotas de ejemplo. Si se cambia el código, hay que volver a generarlo con **Build > Build App Bundle(s) / APK(s) > Build APK(s)** y reemplazarlo.
 
 ### Manual de usuario
 
