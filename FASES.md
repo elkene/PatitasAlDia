@@ -20,7 +20,7 @@ Este documento explica qué hace cada fase, qué archivos involucra, cómo se pr
 | 7 | Foto de la mascota | Terminada |
 | 8 | Comunicación con el veterinario | Terminada |
 | 9 | Pulido | Terminada |
-| 10 | Entregables | **Pendiente**: manual de usuario, video y archivo comprimido |
+| 10 | Entregables | **En progreso**: APK listo en `entregables/` y borrador del manual hecho (fuera del repositorio); faltan los datos de la portada, el video y el archivo comprimido |
 
 Las fases 0 a 9 compilan, pasan sus pruebas automáticas y se probaron en un teléfono físico (Android 17) y en el emulador Pixel Tablet (Android 15). Lo único que falta es la fase 10.
 
@@ -38,7 +38,7 @@ Las fases 0 a 9 compilan, pasan sus pruebas automáticas y se probaron en un tel
 | 6 | Guardar los datos en SQLite | `DbHelper` (`SQLiteOpenHelper`) con 3 tablas y SQL escrito a mano | 1 | Cumplido |
 | 7 | Usar una característica del dispositivo | Cámara (`TakePicture` + `FileProvider`) y galería (`PickVisualMedia`) | 7 | Cumplido |
 | 8 | Usar algún tipo de comunicación | Llamada, SMS y correo con el historial de vacunas (Intents implícitos) | 8 | Cumplido |
-| 9 | Proyecto, manual de usuario y video | Ver fase 10 | 10 | **Pendiente** |
+| 9 | Proyecto, manual de usuario y video | Ver fase 10 | 10 | **En progreso** |
 
 ---
 
@@ -411,11 +411,12 @@ CREATE TABLE citas (
 
 ## Fase 10. Entregables
 
-**Estado: Pendiente.**
+**Estado: En progreso.** El APK ya está en la carpeta `entregables/` y el borrador del manual de usuario está hecho, pero no se sube al repositorio. Falta llenar la portada del manual, grabar el video y generar el archivo comprimido.
 
-- [ ] Manual de usuario
+- [x] Manual de usuario (borrador en Word, se comparte por fuera del repositorio). Falta llenar en la portada: facultad, nombres, matrículas, grupo y docente. Opcional: agregar una captura del correo y del teléfono en horizontal.
 - [ ] Video de demostración
 - [ ] Comprimir el proyecto sin las carpetas `build/` ni `.gradle/`
+- [x] APK de depuración para instalar en cualquier teléfono (`entregables/PatitasAlDia.apk`). Al ser de depuración, la primera vez muestra mascotas de ejemplo. Si se cambia el código, hay que volver a generarlo con **Build > Build App Bundle(s) / APK(s) > Build APK(s)** y reemplazarlo.
 
 ### Manual de usuario
 
