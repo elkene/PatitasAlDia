@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Avisos de vacunas en modo oscuro: tonos más claros para que se lean sobre fondo oscuro -->
+    <color name="aviso_vencida">#FFFFB4AB</color>
+    <color name="aviso_proxima">#FFFFB95C</color>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Foto del formulario en horizontal: la columna es angosta, así que los
+    botones van uno debajo del otro para que el texto no se corte.
+    Mismos ids que layout/include_form_foto.xml.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/img_foto"
+        android:layout_width="@dimen/foto_formulario"
+        android:layout_height="@dimen/foto_formulario"
+        android:background="?attr/colorPrimaryContainer"
+        android:contentDescription="@string/foto_mascota"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.PatitasAlDia.Circulo" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_camara"
+        style="@style/Widget.Material3.Button.TonalButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margen_medio"
+        android:text="@string/foto_camara"
+        app:icon="@drawable/ic_camara" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_galeria"
+        style="@style/Widget.Material3.Button.TonalButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/foto_galeria"
+        app:icon="@drawable/ic_galeria" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_quitar_foto"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/foto_quitar" />
+
+</LinearLayout>

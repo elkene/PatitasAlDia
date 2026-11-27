@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cara de perro con orejas caídas; se muestra si un perro no tiene foto -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Orejas -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M6.6,6.8C3.6,5.8 1.8,8.8 2.3,12.8C2.7,15.6 4.9,15.4 6.3,12Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M17.4,6.8C20.4,5.8 22.2,8.8 21.7,12.8C21.3,15.6 19.1,15.4 17.7,12Z" />
+    <!-- Cabeza con ojos y nariz recortados (evenOdd) -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M6,13a6,7 0,1 0,12 0a6,7 0,1 0,-12 0z M8.7,11.5a1,1 0,1 0,2 0a1,1 0,1 0,-2 0z M13.3,11.5a1,1 0,1 0,2 0a1,1 0,1 0,-2 0z M10.4,15.6a1.6,1.1 0,1 0,3.2 0a1.6,1.1 0,1 0,-3.2 0z" />
+</vector>

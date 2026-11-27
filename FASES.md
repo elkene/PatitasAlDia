@@ -2,7 +2,7 @@
 
 Aplicación Android para llevar el registro de mascotas, sus vacunas y sus citas al veterinario. Proyecto final de Aplicaciones Móviles, Ingeniería en Software y Tecnologías Emergentes, UABC Campus Otay.
 
-Este documento explica qué hace cada fase, qué archivos involucra, cómo se prueba y en qué estado está. Antes de empezar una fase, lee su sección completa y revisa que la fase anterior esté terminada.
+Este documento explica qué hace cada fase, qué archivos involucra, cómo se probó y en qué estado está. El diseño (casos de uso, navegación y distribución de pantallas) es el del documento **M5.2 Diseño del Proyecto**.
 
 ---
 
@@ -13,32 +13,32 @@ Este documento explica qué hace cada fase, qué archivos involucra, cómo se pr
 | 0 | Preparación | Terminada |
 | 1 | Modelo y base de datos | Terminada |
 | 2 | Lista de mascotas | Terminada |
-| 3 | Formulario de mascota | Pendiente (ya existe el esqueleto de la pantalla) |
-| 4 | Detalle en teléfono | Pendiente |
-| 5 | Tableta y orientación | Pendiente |
-| 6 | Guardar el estado | Pendiente |
-| 7 | Foto de la mascota | Pendiente |
-| 8 | Comunicación con el veterinario | Pendiente |
-| 9 | Pulido | Pendiente |
-| 10 | Entregables | Pendiente |
+| 3 | Formulario de mascota | Terminada |
+| 4 | Detalle en teléfono | Terminada |
+| 5 | Tableta y orientación | Terminada |
+| 6 | Guardar el estado | Terminada |
+| 7 | Foto de la mascota | Terminada |
+| 8 | Comunicación con el veterinario | Terminada |
+| 9 | Pulido | Terminada |
+| 10 | Entregables | **En progreso**: borrador del manual hecho (fuera del repositorio); faltan los datos de la portada, el video y el archivo comprimido |
 
-Al terminar una tarea, marca su casilla en este archivo. Al terminar una fase, actualiza también la tabla de arriba.
+Las fases 0 a 9 compilan, pasan sus pruebas automáticas y se probaron en un teléfono físico (Android 17) y en el emulador Pixel Tablet (Android 15). Lo único que falta es la fase 10.
 
 ---
 
 ## Requisitos del proyecto
 
-| # | Requisito | Cómo se cumple | Fase |
-|---|---|---|---|
-| 1 | Java o Kotlin en Android Studio | Kotlin | 0 |
-| 2 | Al menos 2 pantallas con 2 actividades | `MainActivity`, `DetalleMascotaActivity` y `FormMascotaActivity`, con fragmentos de lista y detalle | 2, 3 y 4 |
-| 3 | Funcionar en teléfono y tableta aprovechando la pantalla | Patrón lista-detalle: en la tableta se ven la lista y el detalle lado a lado | 5 |
-| 4 | Funcionar en ambas orientaciones | Layouts `layout-land` para el detalle y el formulario | 5 |
-| 5 | Guardar el estado al rotar o al salir y regresar | `ViewModel` y `SavedStateHandle` / `onSaveInstanceState` | 6 |
-| 6 | Guardar los datos en SQLite | `DbHelper` (`SQLiteOpenHelper`) con 3 tablas | 1 |
-| 7 | Usar una característica del dispositivo | Cámara y galería para la foto de la mascota | 7 |
-| 8 | Usar algún tipo de comunicación | Llamada, SMS y correo al veterinario | 8 |
-| 9 | Proyecto, manual de usuario y video | Ver fase 10 | 10 |
+| # | Requisito | Cómo se cumple | Fase | Estado |
+|---|---|---|---|---|
+| 1 | Java o Kotlin en Android Studio | Kotlin | 0 | Cumplido |
+| 2 | Al menos 2 pantallas con 2 actividades | `MainActivity`, `DetalleMascotaActivity` y `FormMascotaActivity`, con fragmentos de lista y detalle | 2, 3 y 4 | Cumplido |
+| 3 | Funcionar en teléfono y tableta aprovechando la pantalla | Patrón lista-detalle: en la tableta la lista y el detalle se ven lado a lado | 5 | Cumplido |
+| 4 | Funcionar en ambas orientaciones | Layouts `layout-land` para el detalle y el formulario | 5 | Cumplido |
+| 5 | Guardar el estado al rotar o al salir y regresar | `ViewModel` + `SavedStateHandle`; diálogos como `DialogFragment` | 6 | Cumplido |
+| 6 | Guardar los datos en SQLite | `DbHelper` (`SQLiteOpenHelper`) con 3 tablas y SQL escrito a mano | 1 | Cumplido |
+| 7 | Usar una característica del dispositivo | Cámara (`TakePicture` + `FileProvider`) y galería (`PickVisualMedia`) | 7 | Cumplido |
+| 8 | Usar algún tipo de comunicación | Llamada, SMS y correo con el historial de vacunas (Intents implícitos) | 8 | Cumplido |
+| 9 | Proyecto, manual de usuario y video | Ver fase 10 | 10 | **En progreso** |
 
 ---
 
@@ -49,10 +49,14 @@ Al terminar una tarea, marca su casilla en este archivo. Al terminar una fase, a
 3. Crear, si no existen, dos emuladores en el Device Manager: un teléfono (Pixel) y una tableta (Pixel Tablet).
 4. Correr la app con el botón Run.
 5. Pruebas:
-   - Pruebas unitarias: `./gradlew testDebugUnitTest`
-   - Pruebas en el emulador (base de datos): con un emulador encendido, `./gradlew connectedDebugAndroidTest`
+   - Pruebas unitarias (en la computadora): `./gradlew testDebugUnitTest`
+   - Pruebas instrumentadas (en un emulador encendido): `./gradlew connectedDebugAndroidTest`
 
-En modo depuración la app crea tres mascotas de ejemplo (Firulais, Michi y Kiwi) con vacunas y citas la primera vez que se abre. Si quieres empezar con la base vacía o volver a generar los datos, desinstala la app del emulador.
+**Cuidado:** `connectedDebugAndroidTest` desinstala la app al terminar, y con eso se borran sus datos. Si tienes un teléfono personal conectado, corre las pruebas solo en el emulador:
+- Windows PowerShell: `$env:ANDROID_SERIAL="emulator-5554"; ./gradlew connectedDebugAndroidTest`
+- Git Bash: `ANDROID_SERIAL=emulator-5554 ./gradlew connectedDebugAndroidTest`
+
+En modo depuración, la primera vez que se abre la app crea tres mascotas de ejemplo (Firulais, Michi y Kiwi) con vacunas y citas. Para empezar con la base vacía o volver a generar los datos, desinstala la app.
 
 ---
 
@@ -60,14 +64,14 @@ En modo depuración la app crea tres mascotas de ejemplo (Firulais, Michi y Kiwi
 
 - **Lenguaje:** Kotlin. **Interfaz:** Views con layouts XML, actividades y fragmentos. **No** se usa Jetpack Compose.
 - **Base de datos:** `SQLiteOpenHelper` con SQL escrito a mano. **No** se usa Room (lo exige el requisito 6).
-- **View Binding** en todas las actividades, fragmentos y adaptadores. No usar `findViewById`.
-- **Textos:** todos en `res/values/strings.xml`, nunca escritos directo en layouts ni en código. Colores en `colors.xml` y medidas repetidas en `dimens.xml`.
+- **View Binding** en todas las actividades, fragmentos, adaptadores y diálogos. No se usa `findViewById`.
+- **Textos:** todos en `res/values/strings.xml`. Colores en `colors.xml` y medidas en `dimens.xml`. Lint lo verifica (sin avisos).
 - **Idioma:** comentarios, textos de la interfaz y mensajes de commit en español.
-- **Hilos:** las operaciones de base de datos nunca se hacen en el hilo principal. Los ViewModel las lanzan con `viewModelScope.launch(Dispatchers.IO)`.
-- **Dependencias:** no agregar librerías nuevas sin acordarlo con el equipo. La única librería externa aprobada para imágenes es Coil.
-- **Nombres:** clases en `PascalCase`, funciones y variables en `camelCase`, ids de XML en `snake_case` (por ejemplo `btn_llamar`, `txt_nombre`).
-- **Fechas:** en la base `yyyy-MM-dd` y las horas `HH:mm`; en pantalla `dd/MM/yyyy`. La conversión se hace en `FechaUtils`.
-- **Commits:** uno por tarea o grupo pequeño de tareas, en español y en imperativo. Ejemplo: "Agrega formulario de mascota con validación".
+- **Hilos:** las operaciones de base de datos nunca se hacen en el hilo principal: los ViewModel usan `viewModelScope.launch(Dispatchers.IO)` o `withContext(Dispatchers.IO)`.
+- **Dependencias:** no agregar librerías sin acordarlo con el equipo. La única externa para imágenes es Coil.
+- **Nombres:** clases en `PascalCase`, funciones y variables en `camelCase`, ids de XML en `snake_case`.
+- **Fechas:** en la base `yyyy-MM-dd` y horas `HH:mm`; en pantalla `dd/MM/yyyy`. La conversión está en `FechaUtils`.
+- **Commits:** en español y en imperativo. Ejemplo: "Agrega formulario de mascota con validación".
 
 ---
 
@@ -81,86 +85,88 @@ Actividad / Fragmento  --observa-->  ViewModel  --llama-->  DAO  --SQL-->  DbHel
                                      al rotar)              con SQL)
 ```
 
-- **Modelos** (`model/`): `data class` que representan una fila de cada tabla.
-- **DAOs** (`data/`): convierten objetos en filas (`ContentValues`) y filas en objetos (`Cursor`). Son el único lugar donde se escribe SQL.
-- **ViewModel** (`viewmodel/`): pide los datos a los DAOs en un hilo de fondo y los publica en `LiveData`. Sobrevive a la rotación de pantalla.
-- **Interfaz** (`ui/`): actividades, fragmentos, adaptadores y diálogos. Solo observan el `LiveData` y le avisan al ViewModel lo que hace el usuario.
+- **Modelos** (`model/`): `data class` que representan una fila de cada tabla, más los catálogos de especie y sexo y el estado de las vacunas.
+- **DAOs** (`data/`): convierten objetos en filas (`ContentValues`) y filas en objetos (`Cursor`). Son el único lugar con SQL.
+- **ViewModel** (`viewmodel/`): pide los datos a los DAOs en un hilo de fondo y los publica en `LiveData`. Sobrevive a la rotación; lo que debe sobrevivir a que Android cierre la app va en su `SavedStateHandle`.
+- **Interfaz** (`ui/`): actividades, fragmentos, adaptadores y diálogos. Solo observan el `LiveData` y avisan al ViewModel lo que hace el usuario.
+- **Utilidades** (`util/`): fechas, validaciones, fotos, comunicación y selectores de fecha y hora.
 
 ### Estructura de paquetes
-
-Los archivos marcados como "pendiente" todavía no existen.
 
 ```
 app/src/main/java/com/example/patitasaldia/
 ├── data/
-│   ├── DbHelper.kt            Crea la base y las tablas
+│   ├── DbHelper.kt              Crea la base y las tablas (nombres de columnas en TablaMascotas, etc.)
 │   ├── MascotaDao.kt
 │   ├── VacunaDao.kt
 │   ├── CitaDao.kt
-│   ├── CursorExt.kt           Funciones para leer columnas que pueden ser NULL
-│   └── DatosPrueba.kt         Mascotas de ejemplo (solo en depuración)
+│   ├── CursorExt.kt             Leer columnas que pueden ser NULL
+│   └── DatosPrueba.kt           Mascotas de ejemplo (solo en depuración)
 ├── model/
-│   ├── Mascota.kt
-│   ├── Vacuna.kt
-│   └── Cita.kt
+│   ├── Mascota.kt, Vacuna.kt, Cita.kt
+│   ├── Catalogos.kt             Valores de especie y sexo que se guardan en la base
+│   └── EstadoVacuna.kt          Vencida, próxima (< 30 días), al día o sin próxima dosis
 ├── ui/
 │   ├── main/
-│   │   ├── MainActivity.kt
+│   │   ├── MainActivity.kt          Lista y, en tableta, el panel de detalle
 │   │   ├── ListaMascotasFragment.kt
 │   │   └── MascotaAdapter.kt
-│   ├── detalle/                (pendiente, fase 4)
-│   │   ├── DetalleMascotaActivity.kt
-│   │   ├── DetalleMascotaFragment.kt
+│   ├── detalle/
+│   │   ├── DetalleMascotaActivity.kt  Solo teléfono
+│   │   ├── DetalleMascotaFragment.kt  Teléfono y tableta
 │   │   ├── VacunaAdapter.kt
 │   │   └── CitaAdapter.kt
 │   ├── form/
-│   │   └── FormMascotaActivity.kt   (esqueleto; se completa en la fase 3)
-│   └── dialogs/                (pendiente, fase 4)
+│   │   └── FormMascotaActivity.kt
+│   └── dialogs/
 │       ├── NuevaVacunaDialog.kt
-│       └── NuevaCitaDialog.kt
+│       ├── NuevaCitaDialog.kt
+│       └── ConfirmarEliminarDialog.kt
 ├── viewmodel/
 │   ├── MascotasViewModel.kt
-│   └── DetalleMascotaViewModel.kt   (pendiente, fase 4)
-└── util/                       (pendiente)
-    ├── FechaUtils.kt           (fase 3)
-    ├── FotoUtils.kt            (fase 7)
-    └── ComunicacionUtils.kt    (fase 8)
+│   ├── DetalleMascotaViewModel.kt
+│   └── FormMascotaViewModel.kt
+└── util/
+    ├── FechaUtils.kt            yyyy-MM-dd <-> dd/MM/yyyy, días entre fechas, edad
+    ├── Validaciones.kt          Teléfono, correo y peso
+    ├── OrganizadorCitas.kt      Separa citas próximas y pasadas
+    ├── FotoUtils.kt             Crear, copiar y borrar archivos de foto
+    ├── ImagenMascota.kt         Muestra la foto con Coil o el ícono de la especie
+    ├── ComunicacionUtils.kt     Llamar, SMS y correo
+    ├── Selectores.kt            Calendario y reloj de Material (y reconexión al rotar)
+    ├── TextosCatalogo.kt        Texto e ícono de cada especie y sexo
+    ├── CamposTexto.kt           Mostrar la X de borrar solo si el campo tiene texto
+    └── Insets.kt                Espacio para barras del sistema y teclado
+
+app/src/main/res/
+├── layout/            Teléfono vertical (y piezas reutilizables include_*.xml)
+├── layout-land/       Teléfono horizontal: detalle y formulario en dos columnas
+├── layout-sw600dp/    Tableta: pantalla principal con dos paneles y detalle ancho
+├── drawable/          Íconos (Material Design), íconos por especie e ícono de la app
+├── menu/              Acciones de la barra superior
+├── mipmap-anydpi*/    Ícono de la app (adaptativo y para Android 7)
+├── values/            strings, colors, dimens, themes
+├── values-night/      Tema y colores de aviso en modo oscuro
+└── xml/file_paths.xml Carpeta que el FileProvider comparte con la cámara
 ```
 
 ### Pantallas y navegación
 
-| Pantalla | Tipo | Contenido |
-|---|---|---|
-| `MainActivity` | Actividad | Contiene `ListaMascotasFragment` y, en la tableta, también `DetalleMascotaFragment`. Botón flotante (+) para agregar |
-| `DetalleMascotaActivity` | Actividad (solo teléfono) | Contiene `DetalleMascotaFragment` |
-| `FormMascotaActivity` | Actividad | Formulario para agregar o editar una mascota |
-| `ListaMascotasFragment` | Fragmento | `RecyclerView` con las mascotas |
-| `DetalleMascotaFragment` | Fragmento | Foto, datos, botones de comunicación, vacunas y citas |
-| `NuevaVacunaDialog` | `DialogFragment` | Formulario de vacuna (agregar y editar) |
-| `NuevaCitaDialog` | `DialogFragment` | Formulario de cita (agregar y editar) |
-
-```
-MainActivity (lista)
- ├── (+) ──────────────────────────> FormMascotaActivity (nueva)
- └── toque en una mascota
-      ├── Teléfono ───> DetalleMascotaActivity ──> DetalleMascotaFragment
-      └── Tableta  ───> DetalleMascotaFragment en el panel derecho
-
-DetalleMascotaFragment
- ├── Editar ───────> FormMascotaActivity (edición, recibe el id)
- ├── Eliminar ─────> diálogo de confirmación
- ├── + Vacuna ─────> NuevaVacunaDialog
- ├── + Cita ───────> NuevaCitaDialog
- └── Llamar / SMS / Correo ──> Intents implícitos
-```
+| Desde | Acción | Hacia | Cómo |
+|---|---|---|---|
+| Lista | Botón (+) | Formulario (alta) | Intent explícito sin id |
+| Lista | Toque (teléfono) | `DetalleMascotaActivity` | Intent explícito con el id |
+| Lista | Toque (tableta) | Panel derecho | Se reemplaza `DetalleMascotaFragment` en `contenedor_detalle` |
+| Detalle | Editar (lápiz) | Formulario (edición) | Intent explícito con el id |
+| Detalle | Agregar vacuna o cita | Diálogo | `DialogFragment` sobre la misma pantalla |
+| Detalle | Eliminar (basura) | Diálogo de confirmación | `ConfirmarEliminarDialog` + Fragment Result API |
+| Detalle | Llamar, SMS o correo | App del sistema | Intent implícito |
 
 ---
 
 ## Fase 0. Preparación
 
 **Estado: Terminada.**
-
-**Objetivo:** dejar el proyecto listo para programar: lenguaje, dependencias, View Binding y tema visual.
 
 - [x] Crear el proyecto con la plantilla **Empty Views Activity**, nombre "Patitas al Día" y paquete `com.example.patitasaldia`
 - [x] Crear dos emuladores: un teléfono (Pixel) y una tableta (Pixel Tablet)
@@ -169,10 +175,10 @@ DetalleMascotaFragment
 - [x] Activar View Binding en `app/build.gradle.kts`
 - [x] Definir colores, tema y `strings.xml` base
 
-**Qué se hizo:**
-- El código pasó de Java a Kotlin. AGP 9 ya compila Kotlin, así que no hace falta un plugin extra.
+**Notas:**
+- AGP 9 ya compila Kotlin, así que no hace falta un plugin extra.
 - Las versiones de las dependencias están en `gradle/libs.versions.toml`. Coil está en la versión 2.x (`io.coil-kt:coil`).
-- Paleta de colores: naranja como color principal y verde azulado como secundario, con variantes para modo claro (`values/themes.xml`) y oscuro (`values-night/themes.xml`). Ya están definidos los colores `aviso_vencida` y `aviso_proxima` para la fase 4.
+- Paleta: naranja como color principal y verde azulado como secundario, con modo claro y oscuro.
 
 ---
 
@@ -180,21 +186,18 @@ DetalleMascotaFragment
 
 **Estado: Terminada.**
 
-**Objetivo:** crear la capa de datos (requisito 6). Las demás fases leen y guardan información solo a través de los DAOs.
-
-- [x] Crear las clases de datos `Mascota`, `Vacuna` y `Cita` en el paquete `model`
+- [x] Crear las clases de datos `Mascota`, `Vacuna` y `Cita`
 - [x] Crear `DbHelper` con las 3 tablas, llaves foráneas activadas y `onUpgrade`
 - [x] Crear `MascotaDao`, `VacunaDao` y `CitaDao`
-- [x] Insertar 3 mascotas de prueba (solo en modo depuración) y verificarlas con el Database Inspector
+- [x] Insertar 3 mascotas de prueba (solo en depuración) y verificarlas con el Database Inspector
 
 ### Base de datos
 
 - Archivo `patitas.db`, versión 1.
-- Las llaves foráneas se activan en `onConfigure` con `setForeignKeyConstraintsEnabled(true)`. Gracias a esto, al borrar una mascota se borran solas sus vacunas y citas (`ON DELETE CASCADE`).
-- Las fechas se guardan como texto `yyyy-MM-dd` y las horas como `HH:mm`. En ese formato, ordenar como texto da el mismo resultado que ordenar como fecha.
-- La foto **no** se guarda en la base, solo la ruta del archivo.
-- `DbHelper` se usa como una sola instancia para toda la app: `DbHelper.obtenerInstancia(context)`.
-- Los nombres de tablas y columnas están en los objetos `TablaMascotas`, `TablaVacunas` y `TablaCitas`, dentro de `DbHelper.kt`. Úsalos en lugar de escribir los nombres a mano.
+- Las llaves foráneas se activan en `onConfigure`. Gracias a eso, al borrar una mascota se borran solas sus vacunas y citas (`ON DELETE CASCADE`).
+- Las fechas se guardan como texto `yyyy-MM-dd`: ordenarlas como texto da el mismo resultado que ordenarlas como fecha.
+- La foto **no** se guarda en la base: solo la ruta del archivo.
+- `DbHelper` es una sola instancia para toda la app: `DbHelper.obtenerInstancia(context)`.
 
 ```sql
 CREATE TABLE mascotas (
@@ -227,37 +230,21 @@ CREATE TABLE citas (
 );
 ```
 
-### Métodos de los DAOs
-
 | DAO | Métodos | Orden de las consultas |
 |---|---|---|
 | `MascotaDao` | `insertar`, `actualizar`, `eliminar(id)`, `obtenerTodas`, `obtenerPorId` | Por nombre, sin distinguir mayúsculas |
 | `VacunaDao` | `insertar`, `actualizar`, `eliminar(id)`, `obtenerPorMascota` | De la más reciente a la más antigua |
-| `CitaDao` | `insertar`, `actualizar`, `eliminar(id)`, `obtenerPorMascota` | Por fecha y hora, de la más antigua a la más nueva |
+| `CitaDao` | `insertar`, `actualizar`, `eliminar(id)`, `obtenerPorMascota` | Por fecha y hora |
 
-- `insertar` regresa el id nuevo, o `-1` si falló (por ejemplo, si la mascota no existe).
-- `actualizar` y `eliminar` regresan cuántas filas cambiaron.
-- Todas las consultas usan parámetros `?` y cierran el `Cursor` con `use { }`.
+**Datos de prueba:** las fechas se calculan a partir del día en que se crea la base, así que siempre hay una vacuna vencida, otra que vence en menos de 30 días, citas pasadas y futuras, y una mascota sin veterinario (Kiwi).
 
-### Datos de prueba
-
-`DatosPrueba.kt` inserta a Firulais (perro), Michi (gato) y Kiwi (ave), solo si la app es de depuración. Las fechas se calculan a partir del día en que se crea la base, para que siempre existan:
-- una vacuna vencida y otra que vence en menos de 30 días (Firulais);
-- citas pasadas y futuras;
-- una mascota sin datos del veterinario (Kiwi), para probar que los botones de comunicación se deshabilitan.
-
-### Cómo se prueba
-
-- `app/src/androidTest/.../data/DaosTest.kt` tiene 8 pruebas: guardar y leer todos los campos, campos vacíos, actualizar, orden, borrado en cascada y llave foránea. Corren con `./gradlew connectedDebugAndroidTest` y usan una base en memoria, sin tocar `patitas.db`.
-- Con la app corriendo: **View > Tool Windows > App Inspection > Database Inspector** y abrir `patitas.db`.
+**Pruebas:** `DaosTest` (8 pruebas instrumentadas con base en memoria).
 
 ---
 
 ## Fase 2. Lista de mascotas
 
 **Estado: Terminada.**
-
-**Objetivo:** pantalla principal con la lista de mascotas guardadas.
 
 - [x] Crear `MascotasViewModel` que cargue la lista desde `MascotaDao`
 - [x] Crear `ListaMascotasFragment` con `RecyclerView` y `MascotaAdapter` (`ListAdapter` con `DiffUtil`)
@@ -266,208 +253,166 @@ CREATE TABLE citas (
 - [x] Botón flotante (+) que abra `FormMascotaActivity`
 
 **Cómo funciona:**
-- `MascotasViewModel` (hereda de `AndroidViewModel`) lee las mascotas en un hilo de fondo y las publica en `mascotas: LiveData<List<Mascota>>`.
-- `ListaMascotasFragment` obtiene el ViewModel con `activityViewModels()`, así que es el mismo objeto que usa `MainActivity`. Esto servirá en la fase 5 para guardar la mascota seleccionada. El fragmento recarga la lista en `onResume`, para que se actualice al regresar del formulario o del detalle.
-- `MascotaAdapter` usa `DiffUtil`: solo redibuja las filas que cambiaron.
-- Cuando el usuario toca una mascota, el fragmento llama a `onMascotaSeleccionada(mascota)` en la actividad, a través de la interfaz `ListaMascotasFragment.AlSeleccionarMascota`.
-- `activity_main.xml` usa `CoordinatorLayout` con barra superior (`MaterialToolbar`), un `FragmentContainerView` (id `contenedor_lista`) y el botón flotante (id `fab_agregar`).
-
-**Lo que queda para otras fases (no son pendientes de esta):**
-- `MainActivity.onMascotaSeleccionada` está vacío. Abrir el detalle se hace en la fase 4 (teléfono) y la fase 5 (tableta).
-- Todas las mascotas muestran una huella (`ic_huella`). La foto real y el ícono por especie son de la fase 7. Al cargar una foto, hay que quitar el `tint` y el `padding` del `ImageView`, que solo sirven para el ícono.
+- `ListaMascotasFragment` obtiene el ViewModel con `activityViewModels()`, así que es el mismo objeto que usa `MainActivity`.
+- La lista se recarga en `onResume`, así se actualiza al regresar del formulario o del detalle.
+- `DiffUtil` compara la lista nueva con la anterior y solo redibuja las filas que cambiaron.
 
 ---
 
 ## Fase 3. Formulario de mascota
 
-**Estado: Pendiente.** Ya existe el esqueleto: `FormMascotaActivity` muestra la barra superior con el título correcto ("Nueva mascota" o "Editar mascota") y la flecha para regresar. Falta todo el formulario.
+**Estado: Terminada.**
 
-**Objetivo:** agregar y editar mascotas.
+- [x] `FormMascotaActivity` en modo alta (sin id) y edición (con id)
+- [x] Selector de especie y de sexo con *chips*
+- [x] Selector de fecha de nacimiento con `MaterialDatePicker` (no deja elegir fechas futuras)
+- [x] Validación: nombre y especie obligatorios; teléfono de 7 a 15 dígitos; correo con formato válido; peso mayor que 0
+- [x] Guardar en la base y regresar a la lista actualizada
+- [x] Botones de cámara y galería (funcionales desde la fase 7)
 
-- [ ] Crear `FormMascotaActivity` en modo alta (sin id) y edición (con id)
-- [ ] Selector de especie y de sexo (spinner o chips)
-- [ ] Selector de fecha de nacimiento con `MaterialDatePicker`
-- [ ] Validar campos obligatorios (nombre y especie), formato del correo y del teléfono
-- [ ] Guardar en la base de datos y regresar a la lista actualizada
-- [ ] Botones de cámara y galería sin funcionalidad todavía (se completan en la fase 7)
+**Cómo funciona:**
+- Para abrir el formulario: `FormMascotaActivity.crearIntent(context)` (alta) o `crearIntent(context, mascotaId)` (edición).
+- `FormMascotaViewModel` recibe el id directamente en su `SavedStateHandle` (los extras del Intent llegan ahí solos), carga la mascota en modo edición y guarda en un hilo de fondo.
+- En la base se guardan valores fijos ("Perro", "Macho"); el texto que se ve sale de `strings.xml` (`TextosCatalogo.kt`).
+- La fecha se guarda en el campo como texto `dd/MM/yyyy` y se convierte a `yyyy-MM-dd` al guardar. `MaterialDatePicker` trabaja en UTC; `FechaUtils` convierte también en UTC para que la fecha no se recorra un día.
+- Los errores aparecen debajo de cada campo (`TextInputLayout`).
+- En horizontal la foto va a la izquierda y los campos a la derecha (`layout-land/activity_form_mascota.xml`).
 
-**Cómo hacerlo:**
-- Para abrir el formulario usa siempre `FormMascotaActivity.crearIntent(context)` (alta) o `FormMascotaActivity.crearIntent(context, mascotaId)` (edición). Dentro de la actividad, la variable `mascotaId` es `null` en modo alta.
-- Campos: nombre, especie (Perro, Gato, Ave, Otro), raza, sexo (Macho, Hembra), fecha de nacimiento, peso en kg, y datos del veterinario (nombre, teléfono y correo). Usa `TextInputLayout` de Material para mostrar los errores debajo de cada campo.
-- Crea `util/FechaUtils.kt` con la conversión `yyyy-MM-dd` (base) a `dd/MM/yyyy` (pantalla) y al revés. `MaterialDatePicker` regresa milisegundos en UTC; conviértelos con zona horaria UTC para que no se recorra un día.
-- Validación: el correo con `Patterns.EMAIL_ADDRESS` y el teléfono con `Patterns.PHONE` (o mínimo 10 dígitos). Ambos son opcionales, pero si se escriben deben ser válidos.
-- Conviene crear un ViewModel para el formulario (por ejemplo `FormMascotaViewModel`) que cargue la mascota en modo edición y guarde con `MascotaDao.insertar` o `actualizar` en `Dispatchers.IO`. Al terminar, cerrar la actividad con `finish()`. La lista se actualiza sola porque recarga en `onResume`.
-- Los textos de etiquetas, errores y opciones van en `strings.xml`. Las opciones de especie y sexo pueden ir en un `string-array`.
-- Para la fase 5 se necesitará `layout-land/activity_form_mascota.xml`: conviene poner los campos dentro de un `NestedScrollView` desde ahora.
-
-**Cómo probar:** agregar una mascota nueva, ver que aparezca en la lista, intentar guardar sin nombre (debe mostrar error) y escribir un correo inválido.
+**Pruebas:** `ValidacionesTest` y `FechaUtilsTest` (unitarias). Manualmente: guardar vacío muestra errores; teléfono "123" muestra error; alta y edición funcionan.
 
 ---
 
 ## Fase 4. Detalle en teléfono
 
-**Estado: Pendiente.**
+**Estado: Terminada.**
 
-**Objetivo:** ver toda la información de una mascota y administrar sus vacunas y citas.
+- [x] `DetalleMascotaViewModel` carga la mascota, sus vacunas y sus citas
+- [x] `DetalleMascotaFragment` con foto, datos, edad calculada y veterinario
+- [x] `DetalleMascotaActivity` contiene el fragmento y recibe el id
+- [x] Vacunas con `VacunaAdapter`: borde y etiqueta rojos si están vencidas ("Venció hace 15 días") y ámbar si vencen en menos de 30 días ("Vence en 7 días")
+- [x] Citas con `CitaAdapter`, separadas en "Próximas" y "Pasadas" (las pasadas se ven atenuadas)
+- [x] `NuevaVacunaDialog` y `NuevaCitaDialog` para agregar y editar (al tocar una fila se edita)
+- [x] Eliminar vacunas y citas (botón de basura o pulsación larga) y eliminar la mascota, siempre con confirmación
+- [x] Botón para editar la mascota (lápiz en la barra superior)
 
-- [ ] Crear `DetalleMascotaViewModel` que cargue la mascota, sus vacunas y sus citas
-- [ ] Crear `DetalleMascotaFragment` con los datos de la mascota
-- [ ] Crear `DetalleMascotaActivity` que contenga el fragmento y reciba el id
-- [ ] Lista de vacunas con `VacunaAdapter`, resaltando las vencidas o próximas
-- [ ] Lista de citas con `CitaAdapter`, separando próximas y pasadas
-- [ ] `NuevaVacunaDialog` y `NuevaCitaDialog` para agregar y editar
-- [ ] Eliminar vacunas y citas (pulsación larga o deslizando) y eliminar la mascota con confirmación
-- [ ] Botón para editar la mascota
+**Cómo funciona:**
+- `DetalleMascotaFragment` recibe el id en sus `arguments` y no conoce a la actividad que lo contiene; le avisa con la interfaz `DetalleMascotaFragment.Listener`. Por eso sirve igual en el teléfono y en el panel de la tableta.
+- Editar y Eliminar se agregan a la barra superior de la actividad con un `MenuProvider`.
+- Los diálogos guardan usando el ViewModel del fragmento padre (`viewModels(ownerProducer = { requireParentFragment() })`).
+- La regla de vacunas está en `EstadoVacuna` y la separación de citas en `OrganizadorCitas`. Son funciones sin Android, con pruebas unitarias.
 
-**Cómo hacerlo:**
-- En `MainActivity.onMascotaSeleccionada`, abrir `DetalleMascotaActivity` pasándole el id con un extra.
-- `DetalleMascotaFragment` debe recibir el id por `arguments` (crearlo con una función `newInstance(id)`), porque en la fase 5 se reutiliza en el panel derecho de la tableta.
-- Vacunas: resaltar con `aviso_vencida` si `proxima_dosis` ya pasó, y con `aviso_proxima` si faltan menos de 30 días.
-- Citas: separar próximas (fecha y hora mayores o iguales a hoy) de pasadas. La separación se hace en el ViewModel, no en SQL.
-- Los diálogos se muestran con `show(supportFragmentManager, TAG)` para que se recreen solos al rotar. Sirven tanto para agregar como para editar (reciben el id de la vacuna o cita, si existe).
-- Al eliminar una mascota, mostrar un `MaterialAlertDialogBuilder` de confirmación. Las vacunas y citas se borran solas por el `ON DELETE CASCADE`.
-- Botón Editar: `FormMascotaActivity.crearIntent(context, id)`. Al regresar, recargar el detalle en `onResume`.
-- Dejar los botones de Llamar, SMS y Correo en el layout; su funcionalidad es de la fase 8.
-
-**Cómo probar:** con los datos de prueba, Firulais debe mostrar una vacuna resaltada como vencida y otra como próxima, una cita pasada y una próxima.
+**Pruebas:** `EstadoVacunaTest` y `OrganizadorCitasTest` (unitarias).
 
 ---
 
 ## Fase 5. Tableta y orientación
 
-**Estado: Pendiente.**
+**Estado: Terminada.**
 
-**Objetivo:** aprovechar la pantalla grande de la tableta (requisito 3) y adaptar las pantallas en horizontal (requisito 4).
+- [x] `layout-sw600dp/activity_main.xml` con dos paneles (lista 1/3, detalle 2/3)
+- [x] `MainActivity` detecta los dos paneles y muestra el detalle en el panel derecho
+- [x] Mensaje "Selecciona una mascota para ver su información" cuando no hay selección
+- [x] La mascota seleccionada se resalta en la lista
+- [x] `layout-land/fragment_detalle_mascota.xml`: información a la izquierda, vacunas y citas a la derecha
+- [x] `layout-land/activity_form_mascota.xml`: foto a la izquierda, campos a la derecha
+- [x] Al eliminar la mascota seleccionada, el panel derecho se limpia
+- [x] Probado en teléfono vertical y horizontal, y tableta vertical y horizontal
 
-- [ ] Crear `layout-sw600dp/activity_main.xml` con los dos paneles
-- [ ] En `MainActivity`, detectar si hay dos paneles y mostrar el detalle en el panel derecho
-- [ ] Mensaje "Selecciona una mascota" cuando no hay selección en la tableta
-- [ ] Resaltar en la lista la mascota seleccionada (solo en la tableta)
-- [ ] Crear `layout-land/fragment_detalle_mascota.xml`
-- [ ] Crear `layout-land/activity_form_mascota.xml`
-- [ ] Al pasar de tableta horizontal a vertical, o al eliminar la mascota seleccionada, que el panel derecho no quede con datos viejos
-- [ ] Probar en teléfono vertical, teléfono horizontal, tableta vertical y tableta horizontal
-
-**Cómo hacerlo:**
-
-```
-TELÉFONO (vertical)          TABLETA (sw600dp)
-┌──────────────┐             ┌────────────┬─────────────────────┐
-│ Lista        │  toque →    │ Lista      │ Detalle de la       │
-│ (Main)       │  abre       │ (~1/3)     │ mascota elegida     │
-│              │  Detalle    │            │ (~2/3)              │
-└──────────────┘  Activity   └────────────┴─────────────────────┘
-```
-
-- `layout-sw600dp/activity_main.xml` lleva el mismo `contenedor_lista` más un contenedor con id `contenedor_detalle`.
-- Detección: después de `setContentView`, si existe `R.id.contenedor_detalle` la app está en una tableta y el detalle se pone en ese contenedor con `supportFragmentManager.commit { replace(...) }`. Si no existe, se abre `DetalleMascotaActivity`. **No** se revisa el tamaño de pantalla en código: Android elige el layout correcto.
-- El id de la mascota seleccionada se guarda en `MascotasViewModel`, que ya comparten la actividad y la lista.
-- `layout-land/fragment_detalle_mascota.xml`: foto y datos a la izquierda; vacunas y citas a la derecha.
-- `layout-land/activity_form_mascota.xml`: foto a la izquierda y campos a la derecha.
+**Cómo funciona:**
+- La detección se hace revisando si existe `R.id.contenedor_detalle` (solo está en el layout de tableta). No se revisa el tamaño de pantalla en código.
+- `layout-sw600dp` tiene prioridad sobre `layout-land`, así que la tableta usa su propio diseño en ambas orientaciones.
+- Las pantallas están hechas con piezas reutilizables (`include_detalle_info.xml`, `include_detalle_vacunas.xml`, `include_detalle_citas.xml`, `include_form_foto.xml`, `include_form_campos.xml`). Cada orientación o tamaño las acomoda distinto, sin repetir código.
+- Si la pantalla pasa de tableta a teléfono (pantalla dividida o cambio de tamaño), `MainActivity` quita el detalle restaurado para que la app no se cierre por un contenedor que ya no existe. Se probó cambiando la densidad del emulador.
 
 ---
 
 ## Fase 6. Guardar el estado
 
-**Estado: Pendiente.**
+**Estado: Terminada.**
 
-**Objetivo:** que no se pierda nada al rotar ni cuando Android cierra la app en segundo plano (requisito 5).
+- [x] Los ViewModel conservan los datos al rotar
+- [x] La mascota seleccionada en la tableta se guarda en el `SavedStateHandle` de `MascotasViewModel`
+- [x] El formulario conserva lo escrito, la especie y el sexo elegidos, la fecha, la foto y el modo (alta o edición)
+- [x] Probado con "No conservar actividades" y cerrando el proceso de la app en segundo plano
 
-- [ ] Confirmar que los ViewModel conservan los datos al rotar
-- [ ] Guardar el id seleccionado con `SavedStateHandle` u `onSaveInstanceState`
-- [ ] Guardar el estado del formulario (foto temporal, fecha elegida, modo alta o edición)
-- [ ] Probar con "No conservar actividades" activado en todas las pantallas
+| Caso | Solución |
+|---|---|
+| Rotación | Los ViewModel sobreviven y conservan listas y datos |
+| Android cierra la app en segundo plano | `SavedStateHandle` (fotos, mascota seleccionada) y el estado automático de las vistas con id (campos de texto y chips) |
+| Diálogos y selectores de fecha y hora | Son `DialogFragment`: Android los recrea solos; `Selectores` vuelve a conectar su acción después de rotar |
 
-**Dos casos distintos:**
+**Pruebas realizadas:**
+- Formulario a medio llenar con "No conservar actividades": al regresar seguían el nombre, la especie y la raza.
+- Formulario con el proceso cerrado (`adb shell am kill`): igual.
+- Diálogo de vacuna y calendario abiertos y girando la pantalla dos veces: se conservaron.
+- Tableta con una mascota seleccionada y el proceso cerrado: al volver se mostró la misma mascota.
 
-| Caso | Qué pasa | Solución |
-|---|---|---|
-| Rotación | La actividad se destruye y se vuelve a crear | `ViewModel`: conserva la lista, la selección, las vacunas y las citas |
-| Android cierra la app en segundo plano | Se pierde todo lo que está en memoria, incluido el ViewModel | `SavedStateHandle` u `onSaveInstanceState`: guardar el id seleccionado y los datos del formulario |
-
-Qué se guarda en cada pantalla:
-- `MainActivity`: id de la mascota seleccionada (tableta).
-- `DetalleMascotaActivity`: id de la mascota.
-- `FormMascotaActivity`: la ruta de la foto temporal, la fecha elegida y el modo (alta o edición). Los `EditText` con id guardan su texto solos; la foto y los valores de los selectores se guardan a mano.
-- Diálogos: se recrean solos si se mostraron con `show(supportFragmentManager, TAG)`.
-
-**Prueba obligatoria:** en el emulador, activar **Opciones de desarrollador > No conservar actividades**. Llenar medio formulario, cambiar a otra app, regresar y comprobar que los datos siguen ahí.
+**Para probarlo a mano:** en Opciones de desarrollador activar "No conservar actividades", llenar medio formulario, ir a otra app y regresar.
 
 ---
 
 ## Fase 7. Foto de la mascota
 
-**Estado: Pendiente.**
+**Estado: Terminada.**
 
-**Objetivo:** usar la cámara y la galería del dispositivo (requisito 7).
+- [x] `FileProvider` en el manifiesto y `res/xml/file_paths.xml`
+- [x] `FotoUtils` (crear archivo, copiar desde la galería, borrar)
+- [x] Tomar foto con la cámara (`TakePicture`)
+- [x] Elegir foto de la galería (`PickVisualMedia`, no necesita permisos)
+- [x] Mostrar la foto con Coil en la lista, el detalle y el formulario
+- [x] Ícono por defecto según la especie (perro, gato, ave y huella para "Otro")
+- [x] Borrar el archivo de foto al cambiarla, quitarla, salir del formulario sin guardar o eliminar la mascota
 
-- [ ] Configurar el `FileProvider` en el manifiesto y `res/xml/file_paths.xml`
-- [ ] Crear `FotoUtils` (crear archivo, copiar desde la galería, borrar archivo)
-- [ ] Tomar foto con la cámara
-- [ ] Elegir foto de la galería
-- [ ] Mostrar la foto con Coil en la lista, el detalle y el formulario
-- [ ] Ícono por defecto según la especie si no hay foto
-- [ ] Borrar el archivo de la foto al cambiarla o al eliminar la mascota
+**Cómo funciona:**
+- Las fotos se guardan en `filesDir/fotos/` (almacenamiento interno de la app, sin permisos).
+- Cámara: se crea el archivo antes y se pasa su `Uri` (del `FileProvider`) a la app de cámara. La ruta pendiente se guarda en el `SavedStateHandle`, por si Android cierra la app mientras la cámara está abierta.
+- No se declara el permiso `CAMERA` porque la foto la toma la app de cámara del sistema. `uses-feature camera required=false` permite instalar la app en dispositivos sin cámara; en ellos el botón Cámara se oculta.
+- Galería: la imagen elegida se copia a la carpeta de la app porque el `Uri` de la galería puede dejar de funcionar.
+- La foto original no se borra hasta que el usuario guarda otra.
 
-**Cómo hacerlo:**
-- **Cámara:** `registerForActivityResult(ActivityResultContracts.TakePicture())`. Antes, crear un archivo en `filesDir/fotos/mascota_<timestamp>.jpg`, obtener su `Uri` con `FileProvider.getUriForFile(...)` y pasárselo a la cámara. Si el resultado es `false`, borrar el archivo vacío.
-- **Galería:** `registerForActivityResult(ActivityResultContracts.PickVisualMedia())` con `ImageOnly`. No requiere permisos. Copiar la imagen a `filesDir/fotos/`, porque el `Uri` original puede dejar de funcionar.
-- **Manifiesto:**
-  - `<provider>` con `android:authorities="${applicationId}.fileprovider"`.
-  - `res/xml/file_paths.xml` con `<files-path name="fotos" path="fotos/" />`.
-  - `<uses-feature android:name="android.hardware.camera" android:required="false" />`, para que la app se pueda instalar en tabletas sin cámara.
-- **Permisos:** `TakePicture` no necesita el permiso `CAMERA` mientras no se declare en el manifiesto. Si se declara, hay que pedirlo en tiempo de ejecución.
-- **Mostrar:** Coil (`imageView.load(File(ruta))`). En `item_mascota.xml`, al cargar una foto quitar el `tint` y el `padding` del `ImageView`. Si no hay foto, mostrar un ícono según la especie (crearlos en `drawable/`).
-- **Borrar la foto al eliminar la mascota:** esto todavía no está hecho en `MascotaDao.eliminar`. Hay que borrar el archivo con `FotoUtils` desde el ViewModel, antes o después de eliminar la fila.
+**Pruebas:** en el emulador se tomó una foto con la cámara virtual y se eligió otra de la galería. Se verificó en `files/fotos` que solo queda el archivo en uso, que la foto descartada se borra y que al eliminar la mascota se borra su foto.
 
 ---
 
 ## Fase 8. Comunicación con el veterinario
 
-**Estado: Pendiente.**
+**Estado: Terminada.**
 
-**Objetivo:** llamar, enviar SMS y enviar el historial de vacunas por correo (requisito 8).
+- [x] `ComunicacionUtils` con llamada, SMS y correo
+- [x] Texto del historial de vacunas para el correo (datos de la mascota y cada vacuna con sus fechas y notas)
+- [x] Botones en el detalle, deshabilitados si falta el teléfono o el correo del veterinario
+- [x] Manejo de `ActivityNotFoundException` con un aviso (`Toast`)
+- [x] Probado en teléfono y tableta
 
-- [ ] Crear `ComunicacionUtils` con las funciones de llamada, SMS y correo
-- [ ] Armar el texto del historial de vacunas para el correo
-- [ ] Agregar los botones en el detalle y deshabilitarlos si faltan datos del veterinario
-- [ ] Manejar `ActivityNotFoundException`
-- [ ] Probar en el emulador del teléfono y en el de la tableta
-
-**Cómo hacerlo:** todo con `Intent` implícitos; ninguno requiere permisos.
-
-| Acción | Intent | Detalle |
+| Acción | Intent | Resultado probado |
 |---|---|---|
-| Llamar | `Intent(Intent.ACTION_DIAL, Uri.parse("tel:$telefono"))` | Solo abre el marcador, no llama directamente |
-| SMS | `Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:$telefono"))` con el extra `"sms_body"` | Texto: "Hola, quisiera agendar una cita para mi mascota <nombre>." |
-| Correo | `Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"))` con `EXTRA_EMAIL`, `EXTRA_SUBJECT` y `EXTRA_TEXT` | Asunto: "Historial de vacunas de <nombre>". Cuerpo: datos de la mascota y lista de vacunas con fechas |
+| Llamar | `ACTION_DIAL` con `tel:` | Abre el marcador con el número (no llama) |
+| SMS | `ACTION_SENDTO` con `smsto:` y `sms_body` | Abre Mensajes con "Hola, quisiera agendar una cita para mi mascota Firulais." |
+| Correo | `ACTION_SENDTO` con `mailto:`, `EXTRA_EMAIL`, `EXTRA_SUBJECT` y `EXTRA_TEXT` | Abre la app de correo con el destinatario, asunto e historial |
 
-- Si falta el teléfono o el correo del veterinario, deshabilitar el botón correspondiente. Kiwi, en los datos de prueba, no tiene veterinario.
-- Envolver cada `startActivity` en `try/catch (ActivityNotFoundException)` y mostrar un `Toast` si no hay una app que lo maneje (por ejemplo, una tableta sin SMS).
-- En Android 11 o superior, agregar al manifiesto un bloque `<queries>` para `tel`, `smsto` y `mailto`, o simplemente intentar lanzar el intent y capturar la excepción.
+**Pruebas:** `ComunicacionUtilsTest` (instrumentada) revisa el texto del historial.
 
 ---
 
 ## Fase 9. Pulido
 
-**Estado: Pendiente.**
+**Estado: Terminada.**
 
-- [ ] Ícono de la app (Image Asset Studio)
-- [ ] Revisar colores, márgenes y tamaños de texto
-- [ ] Revisar que no haya textos fijos fuera de `strings.xml`
-- [ ] Revisar que la app no se cierre con campos vacíos, sin foto o sin datos del veterinario
-- [ ] Quitar los datos de prueba o dejarlos detrás de una bandera
-- [ ] Generar el APK de depuración y probarlo en un dispositivo físico si es posible
+- [x] Ícono de la app: huella blanca sobre el naranja de la app (adaptativo desde Android 8 y versión para Android 7)
+- [x] Colores, márgenes y tamaños revisados en modo claro y oscuro
+- [x] Sin textos fijos fuera de `strings.xml` (lint sin avisos)
+- [x] La app no se cierra con campos vacíos, sin foto o sin datos del veterinario
+- [x] Datos de prueba detrás de una bandera: solo se insertan si la app es de depuración (`FLAG_DEBUGGABLE`)
 
-**Nota:** los datos de prueba ya están detrás de una bandera: solo se insertan si la app es de depuración (`FLAG_DEBUGGABLE`). La versión release no los incluye. Para desactivarlos también en depuración, cambiar el valor por defecto de `insertarDatosPrueba` en `DbHelper`.
+**Nota:** lint solo avisa que existen versiones más nuevas de algunas librerías. No se actualizaron para no arriesgar cambios a esta altura del proyecto.
 
 ---
 
 ## Fase 10. Entregables
 
-**Estado: Pendiente.**
+**Estado: En progreso.** El borrador del manual de usuario está hecho, pero se comparte por fuera del repositorio. Falta llenar la portada del manual, grabar el video y generar el archivo comprimido.
 
-- [ ] Manual de usuario
+- [x] Manual de usuario (borrador en Word, se comparte por fuera del repositorio). Falta llenar en la portada: facultad, nombres, matrículas, grupo y docente. Opcional: agregar una captura del correo y del teléfono en horizontal.
 - [ ] Video de demostración
 - [ ] Comprimir el proyecto sin las carpetas `build/` ni `.gradle/`
 
@@ -482,10 +427,10 @@ En español, con acentos y la letra ñ correctas:
 5. Uso, con capturas de pantalla:
    - Agregar una mascota (con foto de la cámara y de la galería)
    - Ver, editar y eliminar una mascota
-   - Registrar vacunas y citas
+   - Registrar vacunas y citas (y qué significan los colores rojo y ámbar)
    - Contactar al veterinario (llamada, SMS y correo)
 6. Uso en tableta y en orientación horizontal
-7. Preguntas frecuentes y solución de problemas
+7. Preguntas frecuentes y solución de problemas. Por ejemplo: "¿Por qué el botón Llamar está gris?" (falta el teléfono del veterinario) o "No aparece el botón Cámara" (el dispositivo no tiene cámara).
 
 ### Video (3 a 5 minutos)
 
@@ -498,3 +443,7 @@ En español, con acentos y la letra ñ correctas:
 7. Mostrar la app en la tableta con los dos paneles, en vertical y en horizontal
 8. Llamar, mandar SMS y enviar el historial de vacunas por correo
 9. Cierre
+
+### Archivo comprimido
+
+Comprimir la carpeta del proyecto **sin** `build/`, `app/build/` ni `.gradle/`. Una forma sencilla es `git archive --format=zip -o PatitasAlDia.zip HEAD`, que solo incluye los archivos del repositorio.
